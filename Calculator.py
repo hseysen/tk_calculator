@@ -1,9 +1,10 @@
 import tkinter as tk
 from math import sqrt, factorial
+from tkinter import messagebox
 
 
 APPNAME = "Calculator"
-ICONLOC = "cik.ico"
+ICONLOC = "calc.ico"
 SIZE = (368, 370)
 ENCODING = "utf-8"
 SQRTSYMBOL = "\u221A"
@@ -18,6 +19,11 @@ ENTRYFG = "black"
 BUTTONBG = "#63728A"
 BUTTONFG = "white"
 BUTTONACTIVEBG = "slate gray"
+
+POSSIBLE_ERRORS = {
+    "division by zero": "Sıfra bölmə əməliyyatı",
+    "math domain error": "Riyazi əməliyyat təyin olunmayıb"
+}
 
 
 class Calculator(tk.LabelFrame):
@@ -107,8 +113,16 @@ class Calculator(tk.LabelFrame):
             calculation = "0"
         try:
             res = eval(calculation)
+            res = float(res)
+        except SyntaxError:
+            desc = "Riyazi hesablama sintaksisində səhv var!"
+            messagebox.showerror("Xəta baş verdi!", "Hesablamada xəta var!", detail=desc)
         except Exception as e:
-            print(e)
+            try:
+                desc = POSSIBLE_ERRORS[str(e)]
+            except KeyError:
+                desc = None
+            messagebox.showerror("Xəta baş verdi!", "Hesablamada xəta var!", detail=desc)
         else:
             self.show_answer(res)
         self.entrybox.configure(state=tk.DISABLED)
@@ -169,4 +183,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
