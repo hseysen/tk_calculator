@@ -4,7 +4,7 @@ This tkinter project features a calculator that supports 4 common math operation
 The ↑ button exports the current information on the entry to a text file "output.txt"
 Below are the keyboard shortcuts besides the buttons:
 * 0-9 -> Inserts the corresponding number
-* + - \* / = % . ( ) -> Inserts the corresponding operation
+* \+ \- \* / = % . ( ) -> Inserts the corresponding operation
 * ! -> Inserts "factorial("
 * s -> Inserts "√("
 * p -> Inserts "^"
